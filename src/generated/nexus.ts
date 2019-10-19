@@ -16,16 +16,19 @@ export interface NexusGenInputs {
     id?: string | null; // ID
     name: string; // String!
     password: string; // String!
+    spotifyToken?: string | null; // String
   }
   UserUpdateInput: { // input type
     email?: string | null; // String
     name?: string | null; // String
     password?: string | null; // String
+    spotifyToken?: string | null; // String
   }
   UserUpdateManyMutationInput: { // input type
     email?: string | null; // String
     name?: string | null; // String
     password?: string | null; // String
+    spotifyToken?: string | null; // String
   }
   UserWhereInput: { // input type
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
@@ -87,6 +90,20 @@ export interface NexusGenInputs {
     password_not_in?: string[] | null; // [String!]
     password_not_starts_with?: string | null; // String
     password_starts_with?: string | null; // String
+    spotifyToken?: string | null; // String
+    spotifyToken_contains?: string | null; // String
+    spotifyToken_ends_with?: string | null; // String
+    spotifyToken_gt?: string | null; // String
+    spotifyToken_gte?: string | null; // String
+    spotifyToken_in?: string[] | null; // [String!]
+    spotifyToken_lt?: string | null; // String
+    spotifyToken_lte?: string | null; // String
+    spotifyToken_not?: string | null; // String
+    spotifyToken_not_contains?: string | null; // String
+    spotifyToken_not_ends_with?: string | null; // String
+    spotifyToken_not_in?: string[] | null; // [String!]
+    spotifyToken_not_starts_with?: string | null; // String
+    spotifyToken_starts_with?: string | null; // String
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
@@ -96,7 +113,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  UserOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "password_ASC" | "password_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  UserOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "password_ASC" | "password_DESC" | "spotifyToken_ASC" | "spotifyToken_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
@@ -122,6 +139,7 @@ export interface NexusGenRootTypes {
     email: string; // String!
     id: string; // ID!
     name: string; // String!
+    spotifyToken?: string | null; // String
   }
   UserConnection: { // root type
     edges: NexusGenRootTypes['UserEdge'][]; // [UserEdge!]!
@@ -160,9 +178,12 @@ export interface NexusGenFieldTypes {
     count: any; // Long!
   }
   Mutation: { // field return type
+    changePassword: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     createUser: NexusGenRootTypes['User']; // User!
     deleteManyUsers: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteUser: NexusGenRootTypes['User'] | null; // User
+    login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateManyUsers: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateUser: NexusGenRootTypes['User'] | null; // User
     upsertUser: NexusGenRootTypes['User']; // User!
@@ -174,6 +195,7 @@ export interface NexusGenFieldTypes {
     startCursor: string | null; // String
   }
   Query: { // field return type
+    me: NexusGenRootTypes['User'] | null; // User
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
     usersConnection: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -182,6 +204,7 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // ID!
     name: string; // String!
+    spotifyToken: string | null; // String
   }
   UserConnection: { // field return type
     aggregate: NexusGenRootTypes['AggregateUser']; // AggregateUser!
@@ -196,6 +219,10 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    changePassword: { // args
+      newPassword: string; // String!
+      oldPassword: string; // String!
+    }
     createUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
     }
@@ -204,6 +231,15 @@ export interface NexusGenArgTypes {
     }
     deleteUser: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    login: { // args
+      email?: string | null; // String
+      password: string; // String!
+    }
+    signup: { // args
+      email: string; // String!
+      name: string; // String!
+      password: string; // String!
     }
     updateManyUsers: { // args
       data: NexusGenInputs['UserUpdateManyMutationInput']; // UserUpdateManyMutationInput!

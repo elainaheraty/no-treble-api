@@ -18,9 +18,12 @@ type BatchPayload {
 scalar Long
 
 type Mutation {
+  changePassword(newPassword: String!, oldPassword: String!): AuthPayload!
   createUser(data: UserCreateInput!): User!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteUser(where: UserWhereUniqueInput!): User
+  login(email: String, password: String!): AuthPayload!
+  signup(email: String!, name: String!, password: String!): AuthPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   upsertUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
@@ -34,6 +37,7 @@ type PageInfo {
 }
 
 type Query {
+  me: User
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
   usersConnection(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): UserConnection!
@@ -43,6 +47,7 @@ type User {
   email: String!
   id: ID!
   name: String!
+  spotifyToken: String
 }
 
 type UserConnection {
@@ -56,6 +61,7 @@ input UserCreateInput {
   id: ID
   name: String!
   password: String!
+  spotifyToken: String
 }
 
 type UserEdge {
@@ -74,6 +80,8 @@ enum UserOrderByInput {
   name_DESC
   password_ASC
   password_DESC
+  spotifyToken_ASC
+  spotifyToken_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
@@ -82,12 +90,14 @@ input UserUpdateInput {
   email: String
   name: String
   password: String
+  spotifyToken: String
 }
 
 input UserUpdateManyMutationInput {
   email: String
   name: String
   password: String
+  spotifyToken: String
 }
 
 input UserWhereInput {
@@ -150,6 +160,20 @@ input UserWhereInput {
   password_not_in: [String!]
   password_not_starts_with: String
   password_starts_with: String
+  spotifyToken: String
+  spotifyToken_contains: String
+  spotifyToken_ends_with: String
+  spotifyToken_gt: String
+  spotifyToken_gte: String
+  spotifyToken_in: [String!]
+  spotifyToken_lt: String
+  spotifyToken_lte: String
+  spotifyToken_not: String
+  spotifyToken_not_contains: String
+  spotifyToken_not_ends_with: String
+  spotifyToken_not_in: [String!]
+  spotifyToken_not_starts_with: String
+  spotifyToken_starts_with: String
 }
 
 input UserWhereUniqueInput {

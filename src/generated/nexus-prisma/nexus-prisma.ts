@@ -141,12 +141,14 @@ type UserObject =
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'password', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'spotifyToken', args?: [] | false, alias?: string  } 
 
 type UserFields =
   | 'id'
   | 'email'
   | 'password'
   | 'name'
+  | 'spotifyToken'
 
 
 
@@ -183,6 +185,14 @@ export interface UserFieldDetails {
     description: string
     list: undefined
     nullable: false
+    resolve: undefined
+  }
+  spotifyToken: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
     resolve: undefined
   }
 }
@@ -622,12 +632,14 @@ type UserPreviousValuesObject =
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'password', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'spotifyToken', args?: [] | false, alias?: string  } 
 
 type UserPreviousValuesFields =
   | 'id'
   | 'email'
   | 'password'
   | 'name'
+  | 'spotifyToken'
 
 
 
@@ -664,6 +676,14 @@ export interface UserPreviousValuesFieldDetails {
     description: string
     list: undefined
     nullable: false
+    resolve: undefined
+  }
+  spotifyToken: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
     resolve: undefined
   }
 }
@@ -738,6 +758,20 @@ export interface UserWhereInput {
   name_not_starts_with?: string | null
   name_ends_with?: string | null
   name_not_ends_with?: string | null
+  spotifyToken?: string | null
+  spotifyToken_not?: string | null
+  spotifyToken_in?: string[]
+  spotifyToken_not_in?: string[]
+  spotifyToken_lt?: string | null
+  spotifyToken_lte?: string | null
+  spotifyToken_gt?: string | null
+  spotifyToken_gte?: string | null
+  spotifyToken_contains?: string | null
+  spotifyToken_not_contains?: string | null
+  spotifyToken_starts_with?: string | null
+  spotifyToken_not_starts_with?: string | null
+  spotifyToken_ends_with?: string | null
+  spotifyToken_not_ends_with?: string | null
   AND?: UserWhereInput[]
   OR?: UserWhereInput[]
   NOT?: UserWhereInput[]
@@ -800,6 +834,20 @@ export type UserWhereInputInputObject =
   | { name: 'name_not_starts_with', alias?: string  } 
   | { name: 'name_ends_with', alias?: string  } 
   | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'spotifyToken', alias?: string  } 
+  | { name: 'spotifyToken_not', alias?: string  } 
+  | { name: 'spotifyToken_in', alias?: string  } 
+  | { name: 'spotifyToken_not_in', alias?: string  } 
+  | { name: 'spotifyToken_lt', alias?: string  } 
+  | { name: 'spotifyToken_lte', alias?: string  } 
+  | { name: 'spotifyToken_gt', alias?: string  } 
+  | { name: 'spotifyToken_gte', alias?: string  } 
+  | { name: 'spotifyToken_contains', alias?: string  } 
+  | { name: 'spotifyToken_not_contains', alias?: string  } 
+  | { name: 'spotifyToken_starts_with', alias?: string  } 
+  | { name: 'spotifyToken_not_starts_with', alias?: string  } 
+  | { name: 'spotifyToken_ends_with', alias?: string  } 
+  | { name: 'spotifyToken_not_ends_with', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
@@ -809,6 +857,7 @@ export interface UserCreateInput {
   email?: string
   password?: string
   name?: string
+  spotifyToken?: string | null
 }
 export type UserCreateInputInputObject =
   | Extract<keyof UserCreateInput, string>
@@ -816,28 +865,33 @@ export type UserCreateInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'name', alias?: string  } 
+  | { name: 'spotifyToken', alias?: string  } 
   
 export interface UserUpdateInput {
   email?: string | null
   password?: string | null
   name?: string | null
+  spotifyToken?: string | null
 }
 export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'name', alias?: string  } 
+  | { name: 'spotifyToken', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
   email?: string | null
   password?: string | null
   name?: string | null
+  spotifyToken?: string | null
 }
 export type UserUpdateManyMutationInputInputObject =
   | Extract<keyof UserUpdateManyMutationInput, string>
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'name', alias?: string  } 
+  | { name: 'spotifyToken', alias?: string  } 
   
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -870,6 +924,8 @@ export type UserOrderByInputValues =
   | 'password_DESC'
   | 'name_ASC'
   | 'name_DESC'
+  | 'spotifyToken_ASC'
+  | 'spotifyToken_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

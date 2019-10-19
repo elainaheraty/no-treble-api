@@ -54,6 +54,7 @@ type User {
   email: String!
   password: String!
   name: String!
+  spotifyToken: String
 }
 
 type UserConnection {
@@ -67,6 +68,7 @@ input UserCreateInput {
   email: String!
   password: String!
   name: String!
+  spotifyToken: String
 }
 
 type UserEdge {
@@ -83,6 +85,8 @@ enum UserOrderByInput {
   password_DESC
   name_ASC
   name_DESC
+  spotifyToken_ASC
+  spotifyToken_DESC
 }
 
 type UserPreviousValues {
@@ -90,6 +94,7 @@ type UserPreviousValues {
   email: String!
   password: String!
   name: String!
+  spotifyToken: String
 }
 
 type UserSubscriptionPayload {
@@ -114,12 +119,14 @@ input UserUpdateInput {
   email: String
   password: String
   name: String
+  spotifyToken: String
 }
 
 input UserUpdateManyMutationInput {
   email: String
   password: String
   name: String
+  spotifyToken: String
 }
 
 input UserWhereInput {
@@ -179,6 +186,20 @@ input UserWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  spotifyToken: String
+  spotifyToken_not: String
+  spotifyToken_in: [String!]
+  spotifyToken_not_in: [String!]
+  spotifyToken_lt: String
+  spotifyToken_lte: String
+  spotifyToken_gt: String
+  spotifyToken_gte: String
+  spotifyToken_contains: String
+  spotifyToken_not_contains: String
+  spotifyToken_starts_with: String
+  spotifyToken_not_starts_with: String
+  spotifyToken_ends_with: String
+  spotifyToken_not_ends_with: String
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
