@@ -3,4 +3,5 @@ type User {
   email: String! @unique
   password: String!
   name: String! @unique
+  spotifyToken: String
 }

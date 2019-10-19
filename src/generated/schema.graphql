@@ -6,6 +6,11 @@ type AggregateUser {
   count: Int!
 }
 
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
 type BatchPayload {
   count: Long!
 }

@@ -2,11 +2,12 @@ import { ApolloServer } from 'apollo-server';
 
 import { prisma } from './generated/prisma-client';
 import schema from './schema';
+import { getUser } from './util/auth';
 
 const server = new ApolloServer({
   schema,
-  context: request => ({
-    ...request,
+  context: ({ req }) => ({
+    user: getUser(req),
     prisma
   })
 });
