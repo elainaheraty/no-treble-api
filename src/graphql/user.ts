@@ -1,4 +1,4 @@
-import { prismaObjectType } from 'nexus-prisma'
+import { prismaObjectType } from 'nexus-prisma';
 
 export const User = prismaObjectType<'User'>({
   name: 'User',

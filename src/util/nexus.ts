@@ -1,15 +1,12 @@
-import {
-  prismaExtendType,
-  prismaObjectType
-} from 'nexus-prisma'
-import { PrismaExtendTypeBlock } from 'nexus-prisma/dist/blocks/extendType'
+import { prismaExtendType, prismaObjectType } from 'nexus-prisma';
+import { PrismaExtendTypeBlock } from 'nexus-prisma/dist/blocks/extendType';
 import {
   AddFieldInput,
   FilterInputField,
   PickInputField,
   PrismaObjectTypeNames
-} from 'nexus-prisma/dist/types'
-import { FieldOutConfig } from 'nexus/dist/definitions/definitionBlocks'
+} from 'nexus-prisma/dist/types';
+import { FieldOutConfig } from 'nexus/dist/definitions/definitionBlocks';
 
 type ConfigFunc<
   TypeName extends PrismaObjectTypeNames,
@@ -31,14 +28,14 @@ const prismaField = <TypeName extends PrismaObjectTypeNames>(
     definition: t =>
       t.field<FieldName>(
         fieldName,
-        typeof config === "function" ? config(t) : config
+        typeof config === 'function' ? config(t) : config
       )
   });
 
 type FieldConfig<TypeName extends PrismaObjectTypeNames> =
-  | PickInputField<"objectTypes", TypeName>
-  | FilterInputField<"objectTypes", TypeName>
-  | AddFieldInput<"objectTypes", TypeName>;
+  | PickInputField<'objectTypes', TypeName>
+  | FilterInputField<'objectTypes', TypeName>
+  | AddFieldInput<'objectTypes', TypeName>;
 
 const prismaFields = <TypeName extends PrismaObjectTypeNames>(
   name: TypeName
@@ -50,8 +47,8 @@ const prismaFields = <TypeName extends PrismaObjectTypeNames>(
     }
   });
 
-export const prismaQueryField = prismaField("Query");
-export const prismaQueryFields = prismaFields("Query");
+export const prismaQueryField = prismaField('Query');
+export const prismaQueryFields = prismaFields('Query');
 
-export const prismaMutationField = prismaField("Mutation");
-export const prismaMutationFields = prismaFields("Mutation");
+export const prismaMutationField = prismaField('Mutation');
+export const prismaMutationFields = prismaFields('Mutation');

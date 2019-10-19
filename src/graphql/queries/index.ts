@@ -1,3 +1,3 @@
-import { prismaQueryFields } from '../../util/nexus'
+import { prismaQueryFields } from '../../util/nexus';
 
 export const Query = prismaQueryFields(['*']);

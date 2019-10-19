@@ -1,9 +1,9 @@
-import { makePrismaSchema } from 'nexus-prisma'
-import { join } from 'path'
+import { makePrismaSchema } from 'nexus-prisma';
+import { join } from 'path';
 
-import datamodelInfo from './generated/nexus-prisma'
-import { prisma } from './generated/prisma-client'
-import * as types from './graphql'
+import datamodelInfo from './generated/nexus-prisma';
+import { prisma } from './generated/prisma-client';
+import * as types from './graphql';
 
 const schema = makePrismaSchema({
   types,

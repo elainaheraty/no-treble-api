@@ -1,7 +1,7 @@
-import { ApolloServer } from 'apollo-server'
+import { ApolloServer } from 'apollo-server';
 
-import { prisma } from './generated/prisma-client'
-import schema from './schema'
+import { prisma } from './generated/prisma-client';
+import schema from './schema';
 
 const server = new ApolloServer({
   schema,
