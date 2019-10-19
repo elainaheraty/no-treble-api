@@ -2,6 +2,10 @@
 ### Do not make changes to this file directly
 
 
+type AggregateMessage {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -17,15 +21,228 @@ type BatchPayload {
 
 scalar Long
 
+type Message {
+  body: String!
+  id: ID!
+  receiver: User!
+  sender: User!
+}
+
+type MessageConnection {
+  aggregate: AggregateMessage!
+  edges: [MessageEdge!]!
+  pageInfo: PageInfo!
+}
+
+input MessageCreateInput {
+  body: String!
+  id: ID
+  receiver: UserCreateOneWithoutReceivedMessagesInput!
+  sender: UserCreateOneWithoutSentMessagesInput!
+}
+
+input MessageCreateManyWithoutReceiverInput {
+  connect: [MessageWhereUniqueInput!]
+  create: [MessageCreateWithoutReceiverInput!]
+}
+
+input MessageCreateManyWithoutSenderInput {
+  connect: [MessageWhereUniqueInput!]
+  create: [MessageCreateWithoutSenderInput!]
+}
+
+input MessageCreateWithoutReceiverInput {
+  body: String!
+  id: ID
+  sender: UserCreateOneWithoutSentMessagesInput!
+}
+
+input MessageCreateWithoutSenderInput {
+  body: String!
+  id: ID
+  receiver: UserCreateOneWithoutReceivedMessagesInput!
+}
+
+type MessageEdge {
+  cursor: String!
+  node: Message!
+}
+
+enum MessageOrderByInput {
+  body_ASC
+  body_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input MessageScalarWhereInput {
+  AND: [MessageScalarWhereInput!]
+  body: String
+  body_contains: String
+  body_ends_with: String
+  body_gt: String
+  body_gte: String
+  body_in: [String!]
+  body_lt: String
+  body_lte: String
+  body_not: String
+  body_not_contains: String
+  body_not_ends_with: String
+  body_not_in: [String!]
+  body_not_starts_with: String
+  body_starts_with: String
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  NOT: [MessageScalarWhereInput!]
+  OR: [MessageScalarWhereInput!]
+}
+
+input MessageUpdateInput {
+  body: String
+  receiver: UserUpdateOneRequiredWithoutReceivedMessagesInput
+  sender: UserUpdateOneRequiredWithoutSentMessagesInput
+}
+
+input MessageUpdateManyDataInput {
+  body: String
+}
+
+input MessageUpdateManyMutationInput {
+  body: String
+}
+
+input MessageUpdateManyWithoutReceiverInput {
+  connect: [MessageWhereUniqueInput!]
+  create: [MessageCreateWithoutReceiverInput!]
+  delete: [MessageWhereUniqueInput!]
+  deleteMany: [MessageScalarWhereInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  set: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutReceiverInput!]
+  updateMany: [MessageUpdateManyWithWhereNestedInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutReceiverInput!]
+}
+
+input MessageUpdateManyWithoutSenderInput {
+  connect: [MessageWhereUniqueInput!]
+  create: [MessageCreateWithoutSenderInput!]
+  delete: [MessageWhereUniqueInput!]
+  deleteMany: [MessageScalarWhereInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  set: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutSenderInput!]
+  updateMany: [MessageUpdateManyWithWhereNestedInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutSenderInput!]
+}
+
+input MessageUpdateManyWithWhereNestedInput {
+  data: MessageUpdateManyDataInput!
+  where: MessageScalarWhereInput!
+}
+
+input MessageUpdateWithoutReceiverDataInput {
+  body: String
+  sender: UserUpdateOneRequiredWithoutSentMessagesInput
+}
+
+input MessageUpdateWithoutSenderDataInput {
+  body: String
+  receiver: UserUpdateOneRequiredWithoutReceivedMessagesInput
+}
+
+input MessageUpdateWithWhereUniqueWithoutReceiverInput {
+  data: MessageUpdateWithoutReceiverDataInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageUpdateWithWhereUniqueWithoutSenderInput {
+  data: MessageUpdateWithoutSenderDataInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageUpsertWithWhereUniqueWithoutReceiverInput {
+  create: MessageCreateWithoutReceiverInput!
+  update: MessageUpdateWithoutReceiverDataInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageUpsertWithWhereUniqueWithoutSenderInput {
+  create: MessageCreateWithoutSenderInput!
+  update: MessageUpdateWithoutSenderDataInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageWhereInput {
+  AND: [MessageWhereInput!]
+  body: String
+  body_contains: String
+  body_ends_with: String
+  body_gt: String
+  body_gte: String
+  body_in: [String!]
+  body_lt: String
+  body_lte: String
+  body_not: String
+  body_not_contains: String
+  body_not_ends_with: String
+  body_not_in: [String!]
+  body_not_starts_with: String
+  body_starts_with: String
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  NOT: [MessageWhereInput!]
+  OR: [MessageWhereInput!]
+  receiver: UserWhereInput
+  sender: UserWhereInput
+}
+
+input MessageWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   changePassword(newPassword: String!, oldPassword: String!): AuthPayload!
+  createMessage(data: MessageCreateInput!): Message!
   createUser(data: UserCreateInput!): User!
+  deleteManyMessages(where: MessageWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteMessage(where: MessageWhereUniqueInput!): Message
   deleteUser(where: UserWhereUniqueInput!): User
   login(email: String, password: String!): AuthPayload!
   signup(email: String!, name: String!, password: String!): AuthPayload!
+  updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  upsertMessage(create: MessageCreateInput!, update: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message!
   upsertUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
@@ -38,6 +255,9 @@ type PageInfo {
 
 type Query {
   me: User
+  message(where: MessageWhereUniqueInput!): Message
+  messages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]!
+  messagesConnection(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): MessageConnection!
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
   usersConnection(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): UserConnection!
@@ -47,6 +267,8 @@ type User {
   email: String!
   id: ID!
   name: String!
+  receivedMessages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]
+  sentMessages(after: String, before: String, first: Int, last: Int, orderBy: MessageOrderByInput, skip: Int, where: MessageWhereInput): [Message!]
   spotifyToken: String
 }
 
@@ -61,6 +283,36 @@ input UserCreateInput {
   id: ID
   name: String!
   password: String!
+  receivedMessages: MessageCreateManyWithoutReceiverInput
+  sentMessages: MessageCreateManyWithoutSenderInput
+  spotifyToken: String
+}
+
+input UserCreateOneWithoutReceivedMessagesInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutReceivedMessagesInput
+}
+
+input UserCreateOneWithoutSentMessagesInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutSentMessagesInput
+}
+
+input UserCreateWithoutReceivedMessagesInput {
+  email: String!
+  id: ID
+  name: String!
+  password: String!
+  sentMessages: MessageCreateManyWithoutSenderInput
+  spotifyToken: String
+}
+
+input UserCreateWithoutSentMessagesInput {
+  email: String!
+  id: ID
+  name: String!
+  password: String!
+  receivedMessages: MessageCreateManyWithoutReceiverInput
   spotifyToken: String
 }
 
@@ -90,6 +342,8 @@ input UserUpdateInput {
   email: String
   name: String
   password: String
+  receivedMessages: MessageUpdateManyWithoutReceiverInput
+  sentMessages: MessageUpdateManyWithoutSenderInput
   spotifyToken: String
 }
 
@@ -98,6 +352,46 @@ input UserUpdateManyMutationInput {
   name: String
   password: String
   spotifyToken: String
+}
+
+input UserUpdateOneRequiredWithoutReceivedMessagesInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutReceivedMessagesInput
+  update: UserUpdateWithoutReceivedMessagesDataInput
+  upsert: UserUpsertWithoutReceivedMessagesInput
+}
+
+input UserUpdateOneRequiredWithoutSentMessagesInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutSentMessagesInput
+  update: UserUpdateWithoutSentMessagesDataInput
+  upsert: UserUpsertWithoutSentMessagesInput
+}
+
+input UserUpdateWithoutReceivedMessagesDataInput {
+  email: String
+  name: String
+  password: String
+  sentMessages: MessageUpdateManyWithoutSenderInput
+  spotifyToken: String
+}
+
+input UserUpdateWithoutSentMessagesDataInput {
+  email: String
+  name: String
+  password: String
+  receivedMessages: MessageUpdateManyWithoutReceiverInput
+  spotifyToken: String
+}
+
+input UserUpsertWithoutReceivedMessagesInput {
+  create: UserCreateWithoutReceivedMessagesInput!
+  update: UserUpdateWithoutReceivedMessagesDataInput!
+}
+
+input UserUpsertWithoutSentMessagesInput {
+  create: UserCreateWithoutSentMessagesInput!
+  update: UserUpdateWithoutSentMessagesDataInput!
 }
 
 input UserWhereInput {
@@ -160,6 +454,12 @@ input UserWhereInput {
   password_not_in: [String!]
   password_not_starts_with: String
   password_starts_with: String
+  receivedMessages_every: MessageWhereInput
+  receivedMessages_none: MessageWhereInput
+  receivedMessages_some: MessageWhereInput
+  sentMessages_every: MessageWhereInput
+  sentMessages_none: MessageWhereInput
+  sentMessages_some: MessageWhereInput
   spotifyToken: String
   spotifyToken_contains: String
   spotifyToken_ends_with: String

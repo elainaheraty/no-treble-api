@@ -11,17 +11,203 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  MessageCreateInput: { // input type
+    body: string; // String!
+    id?: string | null; // ID
+    receiver: NexusGenInputs['UserCreateOneWithoutReceivedMessagesInput']; // UserCreateOneWithoutReceivedMessagesInput!
+    sender: NexusGenInputs['UserCreateOneWithoutSentMessagesInput']; // UserCreateOneWithoutSentMessagesInput!
+  }
+  MessageCreateManyWithoutReceiverInput: { // input type
+    connect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    create?: NexusGenInputs['MessageCreateWithoutReceiverInput'][] | null; // [MessageCreateWithoutReceiverInput!]
+  }
+  MessageCreateManyWithoutSenderInput: { // input type
+    connect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    create?: NexusGenInputs['MessageCreateWithoutSenderInput'][] | null; // [MessageCreateWithoutSenderInput!]
+  }
+  MessageCreateWithoutReceiverInput: { // input type
+    body: string; // String!
+    id?: string | null; // ID
+    sender: NexusGenInputs['UserCreateOneWithoutSentMessagesInput']; // UserCreateOneWithoutSentMessagesInput!
+  }
+  MessageCreateWithoutSenderInput: { // input type
+    body: string; // String!
+    id?: string | null; // ID
+    receiver: NexusGenInputs['UserCreateOneWithoutReceivedMessagesInput']; // UserCreateOneWithoutReceivedMessagesInput!
+  }
+  MessageScalarWhereInput: { // input type
+    AND?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
+    body?: string | null; // String
+    body_contains?: string | null; // String
+    body_ends_with?: string | null; // String
+    body_gt?: string | null; // String
+    body_gte?: string | null; // String
+    body_in?: string[] | null; // [String!]
+    body_lt?: string | null; // String
+    body_lte?: string | null; // String
+    body_not?: string | null; // String
+    body_not_contains?: string | null; // String
+    body_not_ends_with?: string | null; // String
+    body_not_in?: string[] | null; // [String!]
+    body_not_starts_with?: string | null; // String
+    body_starts_with?: string | null; // String
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    NOT?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
+    OR?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
+  }
+  MessageUpdateInput: { // input type
+    body?: string | null; // String
+    receiver?: NexusGenInputs['UserUpdateOneRequiredWithoutReceivedMessagesInput'] | null; // UserUpdateOneRequiredWithoutReceivedMessagesInput
+    sender?: NexusGenInputs['UserUpdateOneRequiredWithoutSentMessagesInput'] | null; // UserUpdateOneRequiredWithoutSentMessagesInput
+  }
+  MessageUpdateManyDataInput: { // input type
+    body?: string | null; // String
+  }
+  MessageUpdateManyMutationInput: { // input type
+    body?: string | null; // String
+  }
+  MessageUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['MessageUpdateManyDataInput']; // MessageUpdateManyDataInput!
+    where: NexusGenInputs['MessageScalarWhereInput']; // MessageScalarWhereInput!
+  }
+  MessageUpdateManyWithoutReceiverInput: { // input type
+    connect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    create?: NexusGenInputs['MessageCreateWithoutReceiverInput'][] | null; // [MessageCreateWithoutReceiverInput!]
+    delete?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
+    disconnect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    set?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    update?: NexusGenInputs['MessageUpdateWithWhereUniqueWithoutReceiverInput'][] | null; // [MessageUpdateWithWhereUniqueWithoutReceiverInput!]
+    updateMany?: NexusGenInputs['MessageUpdateManyWithWhereNestedInput'][] | null; // [MessageUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['MessageUpsertWithWhereUniqueWithoutReceiverInput'][] | null; // [MessageUpsertWithWhereUniqueWithoutReceiverInput!]
+  }
+  MessageUpdateManyWithoutSenderInput: { // input type
+    connect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    create?: NexusGenInputs['MessageCreateWithoutSenderInput'][] | null; // [MessageCreateWithoutSenderInput!]
+    delete?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['MessageScalarWhereInput'][] | null; // [MessageScalarWhereInput!]
+    disconnect?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    set?: NexusGenInputs['MessageWhereUniqueInput'][] | null; // [MessageWhereUniqueInput!]
+    update?: NexusGenInputs['MessageUpdateWithWhereUniqueWithoutSenderInput'][] | null; // [MessageUpdateWithWhereUniqueWithoutSenderInput!]
+    updateMany?: NexusGenInputs['MessageUpdateManyWithWhereNestedInput'][] | null; // [MessageUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['MessageUpsertWithWhereUniqueWithoutSenderInput'][] | null; // [MessageUpsertWithWhereUniqueWithoutSenderInput!]
+  }
+  MessageUpdateWithWhereUniqueWithoutReceiverInput: { // input type
+    data: NexusGenInputs['MessageUpdateWithoutReceiverDataInput']; // MessageUpdateWithoutReceiverDataInput!
+    where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
+  }
+  MessageUpdateWithWhereUniqueWithoutSenderInput: { // input type
+    data: NexusGenInputs['MessageUpdateWithoutSenderDataInput']; // MessageUpdateWithoutSenderDataInput!
+    where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
+  }
+  MessageUpdateWithoutReceiverDataInput: { // input type
+    body?: string | null; // String
+    sender?: NexusGenInputs['UserUpdateOneRequiredWithoutSentMessagesInput'] | null; // UserUpdateOneRequiredWithoutSentMessagesInput
+  }
+  MessageUpdateWithoutSenderDataInput: { // input type
+    body?: string | null; // String
+    receiver?: NexusGenInputs['UserUpdateOneRequiredWithoutReceivedMessagesInput'] | null; // UserUpdateOneRequiredWithoutReceivedMessagesInput
+  }
+  MessageUpsertWithWhereUniqueWithoutReceiverInput: { // input type
+    create: NexusGenInputs['MessageCreateWithoutReceiverInput']; // MessageCreateWithoutReceiverInput!
+    update: NexusGenInputs['MessageUpdateWithoutReceiverDataInput']; // MessageUpdateWithoutReceiverDataInput!
+    where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
+  }
+  MessageUpsertWithWhereUniqueWithoutSenderInput: { // input type
+    create: NexusGenInputs['MessageCreateWithoutSenderInput']; // MessageCreateWithoutSenderInput!
+    update: NexusGenInputs['MessageUpdateWithoutSenderDataInput']; // MessageUpdateWithoutSenderDataInput!
+    where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
+  }
+  MessageWhereInput: { // input type
+    AND?: NexusGenInputs['MessageWhereInput'][] | null; // [MessageWhereInput!]
+    body?: string | null; // String
+    body_contains?: string | null; // String
+    body_ends_with?: string | null; // String
+    body_gt?: string | null; // String
+    body_gte?: string | null; // String
+    body_in?: string[] | null; // [String!]
+    body_lt?: string | null; // String
+    body_lte?: string | null; // String
+    body_not?: string | null; // String
+    body_not_contains?: string | null; // String
+    body_not_ends_with?: string | null; // String
+    body_not_in?: string[] | null; // [String!]
+    body_not_starts_with?: string | null; // String
+    body_starts_with?: string | null; // String
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    NOT?: NexusGenInputs['MessageWhereInput'][] | null; // [MessageWhereInput!]
+    OR?: NexusGenInputs['MessageWhereInput'][] | null; // [MessageWhereInput!]
+    receiver?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    sender?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+  }
+  MessageWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
   UserCreateInput: { // input type
     email: string; // String!
     id?: string | null; // ID
     name: string; // String!
     password: string; // String!
+    receivedMessages?: NexusGenInputs['MessageCreateManyWithoutReceiverInput'] | null; // MessageCreateManyWithoutReceiverInput
+    sentMessages?: NexusGenInputs['MessageCreateManyWithoutSenderInput'] | null; // MessageCreateManyWithoutSenderInput
+    spotifyToken?: string | null; // String
+  }
+  UserCreateOneWithoutReceivedMessagesInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutReceivedMessagesInput'] | null; // UserCreateWithoutReceivedMessagesInput
+  }
+  UserCreateOneWithoutSentMessagesInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutSentMessagesInput'] | null; // UserCreateWithoutSentMessagesInput
+  }
+  UserCreateWithoutReceivedMessagesInput: { // input type
+    email: string; // String!
+    id?: string | null; // ID
+    name: string; // String!
+    password: string; // String!
+    sentMessages?: NexusGenInputs['MessageCreateManyWithoutSenderInput'] | null; // MessageCreateManyWithoutSenderInput
+    spotifyToken?: string | null; // String
+  }
+  UserCreateWithoutSentMessagesInput: { // input type
+    email: string; // String!
+    id?: string | null; // ID
+    name: string; // String!
+    password: string; // String!
+    receivedMessages?: NexusGenInputs['MessageCreateManyWithoutReceiverInput'] | null; // MessageCreateManyWithoutReceiverInput
     spotifyToken?: string | null; // String
   }
   UserUpdateInput: { // input type
     email?: string | null; // String
     name?: string | null; // String
     password?: string | null; // String
+    receivedMessages?: NexusGenInputs['MessageUpdateManyWithoutReceiverInput'] | null; // MessageUpdateManyWithoutReceiverInput
+    sentMessages?: NexusGenInputs['MessageUpdateManyWithoutSenderInput'] | null; // MessageUpdateManyWithoutSenderInput
     spotifyToken?: string | null; // String
   }
   UserUpdateManyMutationInput: { // input type
@@ -29,6 +215,40 @@ export interface NexusGenInputs {
     name?: string | null; // String
     password?: string | null; // String
     spotifyToken?: string | null; // String
+  }
+  UserUpdateOneRequiredWithoutReceivedMessagesInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutReceivedMessagesInput'] | null; // UserCreateWithoutReceivedMessagesInput
+    update?: NexusGenInputs['UserUpdateWithoutReceivedMessagesDataInput'] | null; // UserUpdateWithoutReceivedMessagesDataInput
+    upsert?: NexusGenInputs['UserUpsertWithoutReceivedMessagesInput'] | null; // UserUpsertWithoutReceivedMessagesInput
+  }
+  UserUpdateOneRequiredWithoutSentMessagesInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutSentMessagesInput'] | null; // UserCreateWithoutSentMessagesInput
+    update?: NexusGenInputs['UserUpdateWithoutSentMessagesDataInput'] | null; // UserUpdateWithoutSentMessagesDataInput
+    upsert?: NexusGenInputs['UserUpsertWithoutSentMessagesInput'] | null; // UserUpsertWithoutSentMessagesInput
+  }
+  UserUpdateWithoutReceivedMessagesDataInput: { // input type
+    email?: string | null; // String
+    name?: string | null; // String
+    password?: string | null; // String
+    sentMessages?: NexusGenInputs['MessageUpdateManyWithoutSenderInput'] | null; // MessageUpdateManyWithoutSenderInput
+    spotifyToken?: string | null; // String
+  }
+  UserUpdateWithoutSentMessagesDataInput: { // input type
+    email?: string | null; // String
+    name?: string | null; // String
+    password?: string | null; // String
+    receivedMessages?: NexusGenInputs['MessageUpdateManyWithoutReceiverInput'] | null; // MessageUpdateManyWithoutReceiverInput
+    spotifyToken?: string | null; // String
+  }
+  UserUpsertWithoutReceivedMessagesInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutReceivedMessagesInput']; // UserCreateWithoutReceivedMessagesInput!
+    update: NexusGenInputs['UserUpdateWithoutReceivedMessagesDataInput']; // UserUpdateWithoutReceivedMessagesDataInput!
+  }
+  UserUpsertWithoutSentMessagesInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutSentMessagesInput']; // UserCreateWithoutSentMessagesInput!
+    update: NexusGenInputs['UserUpdateWithoutSentMessagesDataInput']; // UserUpdateWithoutSentMessagesDataInput!
   }
   UserWhereInput: { // input type
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
@@ -90,6 +310,12 @@ export interface NexusGenInputs {
     password_not_in?: string[] | null; // [String!]
     password_not_starts_with?: string | null; // String
     password_starts_with?: string | null; // String
+    receivedMessages_every?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    receivedMessages_none?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    receivedMessages_some?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    sentMessages_every?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    sentMessages_none?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    sentMessages_some?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
     spotifyToken?: string | null; // String
     spotifyToken_contains?: string | null; // String
     spotifyToken_ends_with?: string | null; // String
@@ -113,10 +339,14 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  MessageOrderByInput: "body_ASC" | "body_DESC" | "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   UserOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "password_ASC" | "password_DESC" | "spotifyToken_ASC" | "spotifyToken_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
+  AggregateMessage: { // root type
+    count: number; // Int!
+  }
   AggregateUser: { // root type
     count: number; // Int!
   }
@@ -126,6 +356,18 @@ export interface NexusGenRootTypes {
   }
   BatchPayload: { // root type
     count: any; // Long!
+  }
+  Message: { // root type
+    body: string; // String!
+    id: string; // ID!
+  }
+  MessageConnection: { // root type
+    edges: NexusGenRootTypes['MessageEdge'][]; // [MessageEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  MessageEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Message']; // Message!
   }
   Mutation: {};
   PageInfo: { // root type
@@ -158,15 +400,49 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  MessageCreateInput: NexusGenInputs['MessageCreateInput'];
+  MessageCreateManyWithoutReceiverInput: NexusGenInputs['MessageCreateManyWithoutReceiverInput'];
+  MessageCreateManyWithoutSenderInput: NexusGenInputs['MessageCreateManyWithoutSenderInput'];
+  MessageCreateWithoutReceiverInput: NexusGenInputs['MessageCreateWithoutReceiverInput'];
+  MessageCreateWithoutSenderInput: NexusGenInputs['MessageCreateWithoutSenderInput'];
+  MessageScalarWhereInput: NexusGenInputs['MessageScalarWhereInput'];
+  MessageUpdateInput: NexusGenInputs['MessageUpdateInput'];
+  MessageUpdateManyDataInput: NexusGenInputs['MessageUpdateManyDataInput'];
+  MessageUpdateManyMutationInput: NexusGenInputs['MessageUpdateManyMutationInput'];
+  MessageUpdateManyWithWhereNestedInput: NexusGenInputs['MessageUpdateManyWithWhereNestedInput'];
+  MessageUpdateManyWithoutReceiverInput: NexusGenInputs['MessageUpdateManyWithoutReceiverInput'];
+  MessageUpdateManyWithoutSenderInput: NexusGenInputs['MessageUpdateManyWithoutSenderInput'];
+  MessageUpdateWithWhereUniqueWithoutReceiverInput: NexusGenInputs['MessageUpdateWithWhereUniqueWithoutReceiverInput'];
+  MessageUpdateWithWhereUniqueWithoutSenderInput: NexusGenInputs['MessageUpdateWithWhereUniqueWithoutSenderInput'];
+  MessageUpdateWithoutReceiverDataInput: NexusGenInputs['MessageUpdateWithoutReceiverDataInput'];
+  MessageUpdateWithoutSenderDataInput: NexusGenInputs['MessageUpdateWithoutSenderDataInput'];
+  MessageUpsertWithWhereUniqueWithoutReceiverInput: NexusGenInputs['MessageUpsertWithWhereUniqueWithoutReceiverInput'];
+  MessageUpsertWithWhereUniqueWithoutSenderInput: NexusGenInputs['MessageUpsertWithWhereUniqueWithoutSenderInput'];
+  MessageWhereInput: NexusGenInputs['MessageWhereInput'];
+  MessageWhereUniqueInput: NexusGenInputs['MessageWhereUniqueInput'];
   UserCreateInput: NexusGenInputs['UserCreateInput'];
+  UserCreateOneWithoutReceivedMessagesInput: NexusGenInputs['UserCreateOneWithoutReceivedMessagesInput'];
+  UserCreateOneWithoutSentMessagesInput: NexusGenInputs['UserCreateOneWithoutSentMessagesInput'];
+  UserCreateWithoutReceivedMessagesInput: NexusGenInputs['UserCreateWithoutReceivedMessagesInput'];
+  UserCreateWithoutSentMessagesInput: NexusGenInputs['UserCreateWithoutSentMessagesInput'];
   UserUpdateInput: NexusGenInputs['UserUpdateInput'];
   UserUpdateManyMutationInput: NexusGenInputs['UserUpdateManyMutationInput'];
+  UserUpdateOneRequiredWithoutReceivedMessagesInput: NexusGenInputs['UserUpdateOneRequiredWithoutReceivedMessagesInput'];
+  UserUpdateOneRequiredWithoutSentMessagesInput: NexusGenInputs['UserUpdateOneRequiredWithoutSentMessagesInput'];
+  UserUpdateWithoutReceivedMessagesDataInput: NexusGenInputs['UserUpdateWithoutReceivedMessagesDataInput'];
+  UserUpdateWithoutSentMessagesDataInput: NexusGenInputs['UserUpdateWithoutSentMessagesDataInput'];
+  UserUpsertWithoutReceivedMessagesInput: NexusGenInputs['UserUpsertWithoutReceivedMessagesInput'];
+  UserUpsertWithoutSentMessagesInput: NexusGenInputs['UserUpsertWithoutSentMessagesInput'];
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
+  MessageOrderByInput: NexusGenEnums['MessageOrderByInput'];
   UserOrderByInput: NexusGenEnums['UserOrderByInput'];
 }
 
 export interface NexusGenFieldTypes {
+  AggregateMessage: { // field return type
+    count: number; // Int!
+  }
   AggregateUser: { // field return type
     count: number; // Int!
   }
@@ -177,15 +453,36 @@ export interface NexusGenFieldTypes {
   BatchPayload: { // field return type
     count: any; // Long!
   }
+  Message: { // field return type
+    body: string; // String!
+    id: string; // ID!
+    receiver: NexusGenRootTypes['User']; // User!
+    sender: NexusGenRootTypes['User']; // User!
+  }
+  MessageConnection: { // field return type
+    aggregate: NexusGenRootTypes['AggregateMessage']; // AggregateMessage!
+    edges: NexusGenRootTypes['MessageEdge'][]; // [MessageEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  MessageEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Message']; // Message!
+  }
   Mutation: { // field return type
     changePassword: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    createMessage: NexusGenRootTypes['Message']; // Message!
     createUser: NexusGenRootTypes['User']; // User!
+    deleteManyMessages: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteManyUsers: NexusGenRootTypes['BatchPayload']; // BatchPayload!
+    deleteMessage: NexusGenRootTypes['Message'] | null; // Message
     deleteUser: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    updateManyMessages: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateManyUsers: NexusGenRootTypes['BatchPayload']; // BatchPayload!
+    updateMessage: NexusGenRootTypes['Message'] | null; // Message
     updateUser: NexusGenRootTypes['User'] | null; // User
+    upsertMessage: NexusGenRootTypes['Message']; // Message!
     upsertUser: NexusGenRootTypes['User']; // User!
   }
   PageInfo: { // field return type
@@ -196,6 +493,9 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     me: NexusGenRootTypes['User'] | null; // User
+    message: NexusGenRootTypes['Message'] | null; // Message
+    messages: NexusGenRootTypes['Message'][]; // [Message!]!
+    messagesConnection: NexusGenRootTypes['MessageConnection']; // MessageConnection!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
     usersConnection: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -204,6 +504,8 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // ID!
     name: string; // String!
+    receivedMessages: NexusGenRootTypes['Message'][] | null; // [Message!]
+    sentMessages: NexusGenRootTypes['Message'][] | null; // [Message!]
     spotifyToken: string | null; // String
   }
   UserConnection: { // field return type
@@ -223,11 +525,20 @@ export interface NexusGenArgTypes {
       newPassword: string; // String!
       oldPassword: string; // String!
     }
+    createMessage: { // args
+      data: NexusGenInputs['MessageCreateInput']; // MessageCreateInput!
+    }
     createUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
     }
+    deleteManyMessages: { // args
+      where?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    }
     deleteManyUsers: { // args
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    deleteMessage: { // args
+      where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
     }
     deleteUser: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
@@ -241,13 +552,26 @@ export interface NexusGenArgTypes {
       name: string; // String!
       password: string; // String!
     }
+    updateManyMessages: { // args
+      data: NexusGenInputs['MessageUpdateManyMutationInput']; // MessageUpdateManyMutationInput!
+      where?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    }
     updateManyUsers: { // args
       data: NexusGenInputs['UserUpdateManyMutationInput']; // UserUpdateManyMutationInput!
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
+    updateMessage: { // args
+      data: NexusGenInputs['MessageUpdateInput']; // MessageUpdateInput!
+      where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
+    }
     updateUser: { // args
       data: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    upsertMessage: { // args
+      create: NexusGenInputs['MessageCreateInput']; // MessageCreateInput!
+      update: NexusGenInputs['MessageUpdateInput']; // MessageUpdateInput!
+      where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
     }
     upsertUser: { // args
       create: NexusGenInputs['UserCreateInput']; // UserCreateInput!
@@ -256,6 +580,27 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    message: { // args
+      where: NexusGenInputs['MessageWhereUniqueInput']; // MessageWhereUniqueInput!
+    }
+    messages: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['MessageOrderByInput'] | null; // MessageOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    }
+    messagesConnection: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['MessageOrderByInput'] | null; // MessageOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
@@ -278,6 +623,26 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
+  User: {
+    receivedMessages: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['MessageOrderByInput'] | null; // MessageOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    }
+    sentMessages: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['MessageOrderByInput'] | null; // MessageOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['MessageWhereInput'] | null; // MessageWhereInput
+    }
+  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -285,11 +650,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "AggregateUser" | "AuthPayload" | "BatchPayload" | "Mutation" | "PageInfo" | "Query" | "User" | "UserConnection" | "UserEdge";
+export type NexusGenObjectNames = "AggregateMessage" | "AggregateUser" | "AuthPayload" | "BatchPayload" | "Message" | "MessageConnection" | "MessageEdge" | "Mutation" | "PageInfo" | "Query" | "User" | "UserConnection" | "UserEdge";
 
-export type NexusGenInputNames = "UserCreateInput" | "UserUpdateInput" | "UserUpdateManyMutationInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "MessageCreateInput" | "MessageCreateManyWithoutReceiverInput" | "MessageCreateManyWithoutSenderInput" | "MessageCreateWithoutReceiverInput" | "MessageCreateWithoutSenderInput" | "MessageScalarWhereInput" | "MessageUpdateInput" | "MessageUpdateManyDataInput" | "MessageUpdateManyMutationInput" | "MessageUpdateManyWithWhereNestedInput" | "MessageUpdateManyWithoutReceiverInput" | "MessageUpdateManyWithoutSenderInput" | "MessageUpdateWithWhereUniqueWithoutReceiverInput" | "MessageUpdateWithWhereUniqueWithoutSenderInput" | "MessageUpdateWithoutReceiverDataInput" | "MessageUpdateWithoutSenderDataInput" | "MessageUpsertWithWhereUniqueWithoutReceiverInput" | "MessageUpsertWithWhereUniqueWithoutSenderInput" | "MessageWhereInput" | "MessageWhereUniqueInput" | "UserCreateInput" | "UserCreateOneWithoutReceivedMessagesInput" | "UserCreateOneWithoutSentMessagesInput" | "UserCreateWithoutReceivedMessagesInput" | "UserCreateWithoutSentMessagesInput" | "UserUpdateInput" | "UserUpdateManyMutationInput" | "UserUpdateOneRequiredWithoutReceivedMessagesInput" | "UserUpdateOneRequiredWithoutSentMessagesInput" | "UserUpdateWithoutReceivedMessagesDataInput" | "UserUpdateWithoutSentMessagesDataInput" | "UserUpsertWithoutReceivedMessagesInput" | "UserUpsertWithoutSentMessagesInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = "UserOrderByInput";
+export type NexusGenEnumNames = "MessageOrderByInput" | "UserOrderByInput";
 
 export type NexusGenInterfaceNames = never;
 

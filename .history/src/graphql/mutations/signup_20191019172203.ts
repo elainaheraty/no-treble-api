@@ -1,8 +1,8 @@
-import { getAuthPayload } from '../../util/auth';
 import { hash } from 'bcrypt';
-import { mutationField } from 'nexus';
 import { pipe } from 'fp-ts/lib/pipeable';
-import { stringArg } from 'nexus';
+import { mutationField, stringArg } from 'nexus';
+
+import { getAuthPayload } from '../../util/auth';
 
 export const Signup = mutationField('signup', {
   type: 'AuthPayload',

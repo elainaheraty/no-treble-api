@@ -1,5 +1,4 @@
 type Message {
-  id: ID! @id
   sender: User! @relation(name: "UserSent")
   receiver: User! @relation(name: "UserReceived")
   body: String!

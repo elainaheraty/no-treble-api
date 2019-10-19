@@ -15,42 +15,86 @@ export interface NexusPrismaTypes {
   objectTypes: {
     fields: {
       Query: QueryObject
+      Message: MessageObject
       User: UserObject
-      UserConnection: UserConnectionObject
+      MessageConnection: MessageConnectionObject
       PageInfo: PageInfoObject
+      MessageEdge: MessageEdgeObject
+      AggregateMessage: AggregateMessageObject
+      UserConnection: UserConnectionObject
       UserEdge: UserEdgeObject
       AggregateUser: AggregateUserObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
+      MessageSubscriptionPayload: MessageSubscriptionPayloadObject
+      MessagePreviousValues: MessagePreviousValuesObject
       UserSubscriptionPayload: UserSubscriptionPayloadObject
       UserPreviousValues: UserPreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
+      Message: MessageFieldDetails
       User: UserFieldDetails
-      UserConnection: UserConnectionFieldDetails
+      MessageConnection: MessageConnectionFieldDetails
       PageInfo: PageInfoFieldDetails
+      MessageEdge: MessageEdgeFieldDetails
+      AggregateMessage: AggregateMessageFieldDetails
+      UserConnection: UserConnectionFieldDetails
       UserEdge: UserEdgeFieldDetails
       AggregateUser: AggregateUserFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
+      MessageSubscriptionPayload: MessageSubscriptionPayloadFieldDetails
+      MessagePreviousValues: MessagePreviousValuesFieldDetails
       UserSubscriptionPayload: UserSubscriptionPayloadFieldDetails
       UserPreviousValues: UserPreviousValuesFieldDetails
     }
   }
   inputTypes: {
     fields: {
-      UserWhereUniqueInput: UserWhereUniqueInputInputObject
+      MessageWhereUniqueInput: MessageWhereUniqueInputInputObject
+      MessageWhereInput: MessageWhereInputInputObject
       UserWhereInput: UserWhereInputInputObject
+      UserWhereUniqueInput: UserWhereUniqueInputInputObject
+      MessageCreateInput: MessageCreateInputInputObject
+      UserCreateOneWithoutSentMessagesInput: UserCreateOneWithoutSentMessagesInputInputObject
+      UserCreateWithoutSentMessagesInput: UserCreateWithoutSentMessagesInputInputObject
+      MessageCreateManyWithoutReceiverInput: MessageCreateManyWithoutReceiverInputInputObject
+      MessageCreateWithoutReceiverInput: MessageCreateWithoutReceiverInputInputObject
+      UserCreateOneWithoutReceivedMessagesInput: UserCreateOneWithoutReceivedMessagesInputInputObject
+      UserCreateWithoutReceivedMessagesInput: UserCreateWithoutReceivedMessagesInputInputObject
+      MessageCreateManyWithoutSenderInput: MessageCreateManyWithoutSenderInputInputObject
+      MessageCreateWithoutSenderInput: MessageCreateWithoutSenderInputInputObject
+      MessageUpdateInput: MessageUpdateInputInputObject
+      UserUpdateOneRequiredWithoutSentMessagesInput: UserUpdateOneRequiredWithoutSentMessagesInputInputObject
+      UserUpdateWithoutSentMessagesDataInput: UserUpdateWithoutSentMessagesDataInputInputObject
+      MessageUpdateManyWithoutReceiverInput: MessageUpdateManyWithoutReceiverInputInputObject
+      MessageUpdateWithWhereUniqueWithoutReceiverInput: MessageUpdateWithWhereUniqueWithoutReceiverInputInputObject
+      MessageUpdateWithoutReceiverDataInput: MessageUpdateWithoutReceiverDataInputInputObject
+      MessageUpsertWithWhereUniqueWithoutReceiverInput: MessageUpsertWithWhereUniqueWithoutReceiverInputInputObject
+      MessageScalarWhereInput: MessageScalarWhereInputInputObject
+      MessageUpdateManyWithWhereNestedInput: MessageUpdateManyWithWhereNestedInputInputObject
+      MessageUpdateManyDataInput: MessageUpdateManyDataInputInputObject
+      UserUpsertWithoutSentMessagesInput: UserUpsertWithoutSentMessagesInputInputObject
+      UserUpdateOneRequiredWithoutReceivedMessagesInput: UserUpdateOneRequiredWithoutReceivedMessagesInputInputObject
+      UserUpdateWithoutReceivedMessagesDataInput: UserUpdateWithoutReceivedMessagesDataInputInputObject
+      MessageUpdateManyWithoutSenderInput: MessageUpdateManyWithoutSenderInputInputObject
+      MessageUpdateWithWhereUniqueWithoutSenderInput: MessageUpdateWithWhereUniqueWithoutSenderInputInputObject
+      MessageUpdateWithoutSenderDataInput: MessageUpdateWithoutSenderDataInputInputObject
+      MessageUpsertWithWhereUniqueWithoutSenderInput: MessageUpsertWithWhereUniqueWithoutSenderInputInputObject
+      UserUpsertWithoutReceivedMessagesInput: UserUpsertWithoutReceivedMessagesInputInputObject
+      MessageUpdateManyMutationInput: MessageUpdateManyMutationInputInputObject
       UserCreateInput: UserCreateInputInputObject
       UserUpdateInput: UserUpdateInputInputObject
       UserUpdateManyMutationInput: UserUpdateManyMutationInputInputObject
+      MessageSubscriptionWhereInput: MessageSubscriptionWhereInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
+    MessageOrderByInput: MessageOrderByInputValues,
     UserOrderByInput: UserOrderByInputValues,
     MutationType: MutationTypeValues,
   }
@@ -60,16 +104,40 @@ export interface NexusPrismaTypes {
 
 type QueryObject =
   | QueryFields
+  | { name: 'message', args?: QueryMessageArgs[] | false, alias?: string  } 
+  | { name: 'messages', args?: QueryMessagesArgs[] | false, alias?: string  } 
+  | { name: 'messagesConnection', args?: QueryMessagesConnectionArgs[] | false, alias?: string  } 
   | { name: 'user', args?: QueryUserArgs[] | false, alias?: string  } 
   | { name: 'users', args?: QueryUsersArgs[] | false, alias?: string  } 
   | { name: 'usersConnection', args?: QueryUsersConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
+  | 'message'
+  | 'messages'
+  | 'messagesConnection'
   | 'user'
   | 'users'
   | 'usersConnection'
 
 
+type QueryMessageArgs =
+  | 'where'
+type QueryMessagesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryMessagesConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
 type QueryUserArgs =
   | 'where'
 type QueryUsersArgs =
@@ -91,6 +159,45 @@ type QueryUsersConnectionArgs =
   
 
 export interface QueryFieldDetails {
+  message: {
+    type: 'Message'
+    args: Record<QueryMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: MessageWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message | null> | prisma.Message | null
+  }
+  messages: {
+    type: 'Message'
+    args: Record<QueryMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: MessageWhereInput | null, orderBy?: prisma.MessageOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message[]> | prisma.Message[]
+  }
+  messagesConnection: {
+    type: 'MessageConnection'
+    args: Record<QueryMessagesConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: MessageWhereInput | null, orderBy?: prisma.MessageOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MessageConnection> | prisma.MessageConnection
+  }
   user: {
     type: 'User'
     args: Record<QueryUserArgs, core.NexusArgDef<string>>
@@ -133,6 +240,71 @@ export interface QueryFieldDetails {
 }
   
 
+// Types for Message
+
+type MessageObject =
+  | MessageFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'sender', args?: [] | false, alias?: string  } 
+  | { name: 'receiver', args?: [] | false, alias?: string  } 
+  | { name: 'body', args?: [] | false, alias?: string  } 
+
+type MessageFields =
+  | 'id'
+  | 'sender'
+  | 'receiver'
+  | 'body'
+
+
+
+  
+
+export interface MessageFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  sender: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Message">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+  receiver: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Message">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+  body: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for User
 
 type UserObject =
@@ -141,6 +313,8 @@ type UserObject =
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'password', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'sentMessages', args?: UserSentMessagesArgs[] | false, alias?: string  } 
+  | { name: 'receivedMessages', args?: UserReceivedMessagesArgs[] | false, alias?: string  } 
   | { name: 'spotifyToken', args?: [] | false, alias?: string  } 
 
 type UserFields =
@@ -148,10 +322,27 @@ type UserFields =
   | 'email'
   | 'password'
   | 'name'
+  | 'sentMessages'
+  | 'receivedMessages'
   | 'spotifyToken'
 
 
-
+type UserSentMessagesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserReceivedMessagesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
   
 
 export interface UserFieldDetails {
@@ -187,12 +378,218 @@ export interface UserFieldDetails {
     nullable: false
     resolve: undefined
   }
+  sentMessages: {
+    type: 'Message'
+    args: Record<UserSentMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: MessageWhereInput | null, orderBy?: prisma.MessageOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message[]> | prisma.Message[]
+  }
+  receivedMessages: {
+    type: 'Message'
+    args: Record<UserReceivedMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: MessageWhereInput | null, orderBy?: prisma.MessageOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message[]> | prisma.Message[]
+  }
   spotifyToken: {
     type: 'String'
     args: {}
     description: string
     list: undefined
     nullable: true
+    resolve: undefined
+  }
+}
+  
+
+// Types for MessageConnection
+
+type MessageConnectionObject =
+  | MessageConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type MessageConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface MessageConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MessageConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'MessageEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MessageConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MessageEdge[]> | prisma.MessageEdge[]
+  }
+  aggregate: {
+    type: 'AggregateMessage'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MessageConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateMessage> | prisma.AggregateMessage
+  }
+}
+  
+
+// Types for PageInfo
+
+type PageInfoObject =
+  | PageInfoFields
+  | { name: 'hasNextPage', args?: [] | false, alias?: string  } 
+  | { name: 'hasPreviousPage', args?: [] | false, alias?: string  } 
+  | { name: 'startCursor', args?: [] | false, alias?: string  } 
+  | { name: 'endCursor', args?: [] | false, alias?: string  } 
+
+type PageInfoFields =
+  | 'hasNextPage'
+  | 'hasPreviousPage'
+  | 'startCursor'
+  | 'endCursor'
+
+
+
+  
+
+export interface PageInfoFieldDetails {
+  hasNextPage: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  hasPreviousPage: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  startCursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  endCursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+}
+  
+
+// Types for MessageEdge
+
+type MessageEdgeObject =
+  | MessageEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type MessageEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface MessageEdgeFieldDetails {
+  node: {
+    type: 'Message'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MessageEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message> | prisma.Message
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateMessage
+
+type AggregateMessageObject =
+  | AggregateMessageFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateMessageFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateMessageFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
     resolve: undefined
   }
 }
@@ -254,61 +651,6 @@ export interface UserConnectionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.AggregateUser> | prisma.AggregateUser
-  }
-}
-  
-
-// Types for PageInfo
-
-type PageInfoObject =
-  | PageInfoFields
-  | { name: 'hasNextPage', args?: [] | false, alias?: string  } 
-  | { name: 'hasPreviousPage', args?: [] | false, alias?: string  } 
-  | { name: 'startCursor', args?: [] | false, alias?: string  } 
-  | { name: 'endCursor', args?: [] | false, alias?: string  } 
-
-type PageInfoFields =
-  | 'hasNextPage'
-  | 'hasPreviousPage'
-  | 'startCursor'
-  | 'endCursor'
-
-
-
-  
-
-export interface PageInfoFieldDetails {
-  hasNextPage: {
-    type: 'Boolean'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  hasPreviousPage: {
-    type: 'Boolean'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  startCursor: {
-    type: 'String'
-    args: {}
-    description: string
-    list: undefined
-    nullable: true
-    resolve: undefined
-  }
-  endCursor: {
-    type: 'String'
-    args: {}
-    description: string
-    list: undefined
-    nullable: true
-    resolve: undefined
   }
 }
   
@@ -382,6 +724,12 @@ export interface AggregateUserFieldDetails {
 
 type MutationObject =
   | MutationFields
+  | { name: 'createMessage', args?: MutationCreateMessageArgs[] | false, alias?: string  } 
+  | { name: 'updateMessage', args?: MutationUpdateMessageArgs[] | false, alias?: string  } 
+  | { name: 'updateManyMessages', args?: MutationUpdateManyMessagesArgs[] | false, alias?: string  } 
+  | { name: 'upsertMessage', args?: MutationUpsertMessageArgs[] | false, alias?: string  } 
+  | { name: 'deleteMessage', args?: MutationDeleteMessageArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyMessages', args?: MutationDeleteManyMessagesArgs[] | false, alias?: string  } 
   | { name: 'createUser', args?: MutationCreateUserArgs[] | false, alias?: string  } 
   | { name: 'updateUser', args?: MutationUpdateUserArgs[] | false, alias?: string  } 
   | { name: 'updateManyUsers', args?: MutationUpdateManyUsersArgs[] | false, alias?: string  } 
@@ -390,6 +738,12 @@ type MutationObject =
   | { name: 'deleteManyUsers', args?: MutationDeleteManyUsersArgs[] | false, alias?: string  } 
 
 type MutationFields =
+  | 'createMessage'
+  | 'updateMessage'
+  | 'updateManyMessages'
+  | 'upsertMessage'
+  | 'deleteMessage'
+  | 'deleteManyMessages'
   | 'createUser'
   | 'updateUser'
   | 'updateManyUsers'
@@ -398,6 +752,22 @@ type MutationFields =
   | 'deleteManyUsers'
 
 
+type MutationCreateMessageArgs =
+  | 'data'
+type MutationUpdateMessageArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyMessagesArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertMessageArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteMessageArgs =
+  | 'where'
+type MutationDeleteManyMessagesArgs =
+  | 'where'
 type MutationCreateUserArgs =
   | 'data'
 type MutationUpdateUserArgs =
@@ -417,6 +787,84 @@ type MutationDeleteManyUsersArgs =
   
 
 export interface MutationFieldDetails {
+  createMessage: {
+    type: 'Message'
+    args: Record<MutationCreateMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: MessageCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message> | prisma.Message
+  }
+  updateMessage: {
+    type: 'Message'
+    args: Record<MutationUpdateMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: MessageUpdateInput, where: MessageWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message | null> | prisma.Message | null
+  }
+  updateManyMessages: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: MessageUpdateManyMutationInput, where?: MessageWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertMessage: {
+    type: 'Message'
+    args: Record<MutationUpsertMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: MessageWhereUniqueInput, create: MessageCreateInput, update: MessageUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message> | prisma.Message
+  }
+  deleteMessage: {
+    type: 'Message'
+    args: Record<MutationDeleteMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: MessageWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message | null> | prisma.Message | null
+  }
+  deleteManyMessages: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: MessageWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
   createUser: {
     type: 'User'
     args: Record<MutationCreateUserArgs, core.NexusArgDef<string>>
@@ -527,17 +975,34 @@ export interface BatchPayloadFieldDetails {
 
 type SubscriptionObject =
   | SubscriptionFields
+  | { name: 'message', args?: SubscriptionMessageArgs[] | false, alias?: string  } 
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
+  | 'message'
   | 'user'
 
 
+type SubscriptionMessageArgs =
+  | 'where'
 type SubscriptionUserArgs =
   | 'where'
   
 
 export interface SubscriptionFieldDetails {
+  message: {
+    type: 'MessageSubscriptionPayload'
+    args: Record<SubscriptionMessageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: MessageSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MessageSubscriptionPayload | null> | prisma.MessageSubscriptionPayload | null
+  }
   user: {
     type: 'UserSubscriptionPayload'
     args: Record<SubscriptionUserArgs, core.NexusArgDef<string>>
@@ -550,6 +1015,111 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserSubscriptionPayload | null> | prisma.UserSubscriptionPayload | null
+  }
+}
+  
+
+// Types for MessageSubscriptionPayload
+
+type MessageSubscriptionPayloadObject =
+  | MessageSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type MessageSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface MessageSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MessageSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Message'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"MessageSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Message | null> | prisma.Message | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'MessagePreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"MessageSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MessagePreviousValues | null> | prisma.MessagePreviousValues | null
+  }
+}
+  
+
+// Types for MessagePreviousValues
+
+type MessagePreviousValuesObject =
+  | MessagePreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'body', args?: [] | false, alias?: string  } 
+
+type MessagePreviousValuesFields =
+  | 'id'
+  | 'body'
+
+
+
+  
+
+export interface MessagePreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  body: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
   }
 }
   
@@ -690,16 +1260,83 @@ export interface UserPreviousValuesFieldDetails {
   
 
 
-export interface UserWhereUniqueInput {
+export interface MessageWhereUniqueInput {
   id?: string | null
-  email?: string | null
-  name?: string | null
 }
-export type UserWhereUniqueInputInputObject =
-  | Extract<keyof UserWhereUniqueInput, string>
+export type MessageWhereUniqueInputInputObject =
+  | Extract<keyof MessageWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'email', alias?: string  } 
-  | { name: 'name', alias?: string  } 
+  
+export interface MessageWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  sender?: UserWhereInput | null
+  receiver?: UserWhereInput | null
+  body?: string | null
+  body_not?: string | null
+  body_in?: string[]
+  body_not_in?: string[]
+  body_lt?: string | null
+  body_lte?: string | null
+  body_gt?: string | null
+  body_gte?: string | null
+  body_contains?: string | null
+  body_not_contains?: string | null
+  body_starts_with?: string | null
+  body_not_starts_with?: string | null
+  body_ends_with?: string | null
+  body_not_ends_with?: string | null
+  AND?: MessageWhereInput[]
+  OR?: MessageWhereInput[]
+  NOT?: MessageWhereInput[]
+}
+export type MessageWhereInputInputObject =
+  | Extract<keyof MessageWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'sender', alias?: string  } 
+  | { name: 'receiver', alias?: string  } 
+  | { name: 'body', alias?: string  } 
+  | { name: 'body_not', alias?: string  } 
+  | { name: 'body_in', alias?: string  } 
+  | { name: 'body_not_in', alias?: string  } 
+  | { name: 'body_lt', alias?: string  } 
+  | { name: 'body_lte', alias?: string  } 
+  | { name: 'body_gt', alias?: string  } 
+  | { name: 'body_gte', alias?: string  } 
+  | { name: 'body_contains', alias?: string  } 
+  | { name: 'body_not_contains', alias?: string  } 
+  | { name: 'body_starts_with', alias?: string  } 
+  | { name: 'body_not_starts_with', alias?: string  } 
+  | { name: 'body_ends_with', alias?: string  } 
+  | { name: 'body_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
   
 export interface UserWhereInput {
   id?: string | null
@@ -758,6 +1395,12 @@ export interface UserWhereInput {
   name_not_starts_with?: string | null
   name_ends_with?: string | null
   name_not_ends_with?: string | null
+  sentMessages_every?: MessageWhereInput | null
+  sentMessages_some?: MessageWhereInput | null
+  sentMessages_none?: MessageWhereInput | null
+  receivedMessages_every?: MessageWhereInput | null
+  receivedMessages_some?: MessageWhereInput | null
+  receivedMessages_none?: MessageWhereInput | null
   spotifyToken?: string | null
   spotifyToken_not?: string | null
   spotifyToken_in?: string[]
@@ -834,6 +1477,12 @@ export type UserWhereInputInputObject =
   | { name: 'name_not_starts_with', alias?: string  } 
   | { name: 'name_ends_with', alias?: string  } 
   | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'sentMessages_every', alias?: string  } 
+  | { name: 'sentMessages_some', alias?: string  } 
+  | { name: 'sentMessages_none', alias?: string  } 
+  | { name: 'receivedMessages_every', alias?: string  } 
+  | { name: 'receivedMessages_some', alias?: string  } 
+  | { name: 'receivedMessages_none', alias?: string  } 
   | { name: 'spotifyToken', alias?: string  } 
   | { name: 'spotifyToken_not', alias?: string  } 
   | { name: 'spotifyToken_in', alias?: string  } 
@@ -852,11 +1501,408 @@ export type UserWhereInputInputObject =
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
+export interface UserWhereUniqueInput {
+  id?: string | null
+  email?: string | null
+  name?: string | null
+}
+export type UserWhereUniqueInputInputObject =
+  | Extract<keyof UserWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  
+export interface MessageCreateInput {
+  id?: string | null
+  sender?: UserCreateOneWithoutSentMessagesInput
+  receiver?: UserCreateOneWithoutReceivedMessagesInput
+  body?: string
+}
+export type MessageCreateInputInputObject =
+  | Extract<keyof MessageCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'sender', alias?: string  } 
+  | { name: 'receiver', alias?: string  } 
+  | { name: 'body', alias?: string  } 
+  
+export interface UserCreateOneWithoutSentMessagesInput {
+  create?: UserCreateWithoutSentMessagesInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneWithoutSentMessagesInputInputObject =
+  | Extract<keyof UserCreateOneWithoutSentMessagesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutSentMessagesInput {
+  id?: string | null
+  email?: string
+  password?: string
+  name?: string
+  receivedMessages?: MessageCreateManyWithoutReceiverInput | null
+  spotifyToken?: string | null
+}
+export type UserCreateWithoutSentMessagesInputInputObject =
+  | Extract<keyof UserCreateWithoutSentMessagesInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'receivedMessages', alias?: string  } 
+  | { name: 'spotifyToken', alias?: string  } 
+  
+export interface MessageCreateManyWithoutReceiverInput {
+  create?: MessageCreateWithoutReceiverInput[]
+  connect?: MessageWhereUniqueInput[]
+}
+export type MessageCreateManyWithoutReceiverInputInputObject =
+  | Extract<keyof MessageCreateManyWithoutReceiverInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface MessageCreateWithoutReceiverInput {
+  id?: string | null
+  sender?: UserCreateOneWithoutSentMessagesInput
+  body?: string
+}
+export type MessageCreateWithoutReceiverInputInputObject =
+  | Extract<keyof MessageCreateWithoutReceiverInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'sender', alias?: string  } 
+  | { name: 'body', alias?: string  } 
+  
+export interface UserCreateOneWithoutReceivedMessagesInput {
+  create?: UserCreateWithoutReceivedMessagesInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneWithoutReceivedMessagesInputInputObject =
+  | Extract<keyof UserCreateOneWithoutReceivedMessagesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutReceivedMessagesInput {
+  id?: string | null
+  email?: string
+  password?: string
+  name?: string
+  sentMessages?: MessageCreateManyWithoutSenderInput | null
+  spotifyToken?: string | null
+}
+export type UserCreateWithoutReceivedMessagesInputInputObject =
+  | Extract<keyof UserCreateWithoutReceivedMessagesInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'sentMessages', alias?: string  } 
+  | { name: 'spotifyToken', alias?: string  } 
+  
+export interface MessageCreateManyWithoutSenderInput {
+  create?: MessageCreateWithoutSenderInput[]
+  connect?: MessageWhereUniqueInput[]
+}
+export type MessageCreateManyWithoutSenderInputInputObject =
+  | Extract<keyof MessageCreateManyWithoutSenderInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface MessageCreateWithoutSenderInput {
+  id?: string | null
+  receiver?: UserCreateOneWithoutReceivedMessagesInput
+  body?: string
+}
+export type MessageCreateWithoutSenderInputInputObject =
+  | Extract<keyof MessageCreateWithoutSenderInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'receiver', alias?: string  } 
+  | { name: 'body', alias?: string  } 
+  
+export interface MessageUpdateInput {
+  sender?: UserUpdateOneRequiredWithoutSentMessagesInput | null
+  receiver?: UserUpdateOneRequiredWithoutReceivedMessagesInput | null
+  body?: string | null
+}
+export type MessageUpdateInputInputObject =
+  | Extract<keyof MessageUpdateInput, string>
+  | { name: 'sender', alias?: string  } 
+  | { name: 'receiver', alias?: string  } 
+  | { name: 'body', alias?: string  } 
+  
+export interface UserUpdateOneRequiredWithoutSentMessagesInput {
+  create?: UserCreateWithoutSentMessagesInput | null
+  update?: UserUpdateWithoutSentMessagesDataInput | null
+  upsert?: UserUpsertWithoutSentMessagesInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneRequiredWithoutSentMessagesInputInputObject =
+  | Extract<keyof UserUpdateOneRequiredWithoutSentMessagesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateWithoutSentMessagesDataInput {
+  email?: string | null
+  password?: string | null
+  name?: string | null
+  receivedMessages?: MessageUpdateManyWithoutReceiverInput | null
+  spotifyToken?: string | null
+}
+export type UserUpdateWithoutSentMessagesDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutSentMessagesDataInput, string>
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'receivedMessages', alias?: string  } 
+  | { name: 'spotifyToken', alias?: string  } 
+  
+export interface MessageUpdateManyWithoutReceiverInput {
+  create?: MessageCreateWithoutReceiverInput[]
+  delete?: MessageWhereUniqueInput[]
+  connect?: MessageWhereUniqueInput[]
+  set?: MessageWhereUniqueInput[]
+  disconnect?: MessageWhereUniqueInput[]
+  update?: MessageUpdateWithWhereUniqueWithoutReceiverInput[]
+  upsert?: MessageUpsertWithWhereUniqueWithoutReceiverInput[]
+  deleteMany?: MessageScalarWhereInput[]
+  updateMany?: MessageUpdateManyWithWhereNestedInput[]
+}
+export type MessageUpdateManyWithoutReceiverInputInputObject =
+  | Extract<keyof MessageUpdateManyWithoutReceiverInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface MessageUpdateWithWhereUniqueWithoutReceiverInput {
+  where?: MessageWhereUniqueInput
+  data?: MessageUpdateWithoutReceiverDataInput
+}
+export type MessageUpdateWithWhereUniqueWithoutReceiverInputInputObject =
+  | Extract<keyof MessageUpdateWithWhereUniqueWithoutReceiverInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface MessageUpdateWithoutReceiverDataInput {
+  sender?: UserUpdateOneRequiredWithoutSentMessagesInput | null
+  body?: string | null
+}
+export type MessageUpdateWithoutReceiverDataInputInputObject =
+  | Extract<keyof MessageUpdateWithoutReceiverDataInput, string>
+  | { name: 'sender', alias?: string  } 
+  | { name: 'body', alias?: string  } 
+  
+export interface MessageUpsertWithWhereUniqueWithoutReceiverInput {
+  where?: MessageWhereUniqueInput
+  update?: MessageUpdateWithoutReceiverDataInput
+  create?: MessageCreateWithoutReceiverInput
+}
+export type MessageUpsertWithWhereUniqueWithoutReceiverInputInputObject =
+  | Extract<keyof MessageUpsertWithWhereUniqueWithoutReceiverInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface MessageScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  body?: string | null
+  body_not?: string | null
+  body_in?: string[]
+  body_not_in?: string[]
+  body_lt?: string | null
+  body_lte?: string | null
+  body_gt?: string | null
+  body_gte?: string | null
+  body_contains?: string | null
+  body_not_contains?: string | null
+  body_starts_with?: string | null
+  body_not_starts_with?: string | null
+  body_ends_with?: string | null
+  body_not_ends_with?: string | null
+  AND?: MessageScalarWhereInput[]
+  OR?: MessageScalarWhereInput[]
+  NOT?: MessageScalarWhereInput[]
+}
+export type MessageScalarWhereInputInputObject =
+  | Extract<keyof MessageScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'body', alias?: string  } 
+  | { name: 'body_not', alias?: string  } 
+  | { name: 'body_in', alias?: string  } 
+  | { name: 'body_not_in', alias?: string  } 
+  | { name: 'body_lt', alias?: string  } 
+  | { name: 'body_lte', alias?: string  } 
+  | { name: 'body_gt', alias?: string  } 
+  | { name: 'body_gte', alias?: string  } 
+  | { name: 'body_contains', alias?: string  } 
+  | { name: 'body_not_contains', alias?: string  } 
+  | { name: 'body_starts_with', alias?: string  } 
+  | { name: 'body_not_starts_with', alias?: string  } 
+  | { name: 'body_ends_with', alias?: string  } 
+  | { name: 'body_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface MessageUpdateManyWithWhereNestedInput {
+  where?: MessageScalarWhereInput
+  data?: MessageUpdateManyDataInput
+}
+export type MessageUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof MessageUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface MessageUpdateManyDataInput {
+  body?: string | null
+}
+export type MessageUpdateManyDataInputInputObject =
+  | Extract<keyof MessageUpdateManyDataInput, string>
+  | { name: 'body', alias?: string  } 
+  
+export interface UserUpsertWithoutSentMessagesInput {
+  update?: UserUpdateWithoutSentMessagesDataInput
+  create?: UserCreateWithoutSentMessagesInput
+}
+export type UserUpsertWithoutSentMessagesInputInputObject =
+  | Extract<keyof UserUpsertWithoutSentMessagesInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserUpdateOneRequiredWithoutReceivedMessagesInput {
+  create?: UserCreateWithoutReceivedMessagesInput | null
+  update?: UserUpdateWithoutReceivedMessagesDataInput | null
+  upsert?: UserUpsertWithoutReceivedMessagesInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneRequiredWithoutReceivedMessagesInputInputObject =
+  | Extract<keyof UserUpdateOneRequiredWithoutReceivedMessagesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateWithoutReceivedMessagesDataInput {
+  email?: string | null
+  password?: string | null
+  name?: string | null
+  sentMessages?: MessageUpdateManyWithoutSenderInput | null
+  spotifyToken?: string | null
+}
+export type UserUpdateWithoutReceivedMessagesDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutReceivedMessagesDataInput, string>
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'sentMessages', alias?: string  } 
+  | { name: 'spotifyToken', alias?: string  } 
+  
+export interface MessageUpdateManyWithoutSenderInput {
+  create?: MessageCreateWithoutSenderInput[]
+  delete?: MessageWhereUniqueInput[]
+  connect?: MessageWhereUniqueInput[]
+  set?: MessageWhereUniqueInput[]
+  disconnect?: MessageWhereUniqueInput[]
+  update?: MessageUpdateWithWhereUniqueWithoutSenderInput[]
+  upsert?: MessageUpsertWithWhereUniqueWithoutSenderInput[]
+  deleteMany?: MessageScalarWhereInput[]
+  updateMany?: MessageUpdateManyWithWhereNestedInput[]
+}
+export type MessageUpdateManyWithoutSenderInputInputObject =
+  | Extract<keyof MessageUpdateManyWithoutSenderInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface MessageUpdateWithWhereUniqueWithoutSenderInput {
+  where?: MessageWhereUniqueInput
+  data?: MessageUpdateWithoutSenderDataInput
+}
+export type MessageUpdateWithWhereUniqueWithoutSenderInputInputObject =
+  | Extract<keyof MessageUpdateWithWhereUniqueWithoutSenderInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface MessageUpdateWithoutSenderDataInput {
+  receiver?: UserUpdateOneRequiredWithoutReceivedMessagesInput | null
+  body?: string | null
+}
+export type MessageUpdateWithoutSenderDataInputInputObject =
+  | Extract<keyof MessageUpdateWithoutSenderDataInput, string>
+  | { name: 'receiver', alias?: string  } 
+  | { name: 'body', alias?: string  } 
+  
+export interface MessageUpsertWithWhereUniqueWithoutSenderInput {
+  where?: MessageWhereUniqueInput
+  update?: MessageUpdateWithoutSenderDataInput
+  create?: MessageCreateWithoutSenderInput
+}
+export type MessageUpsertWithWhereUniqueWithoutSenderInputInputObject =
+  | Extract<keyof MessageUpsertWithWhereUniqueWithoutSenderInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserUpsertWithoutReceivedMessagesInput {
+  update?: UserUpdateWithoutReceivedMessagesDataInput
+  create?: UserCreateWithoutReceivedMessagesInput
+}
+export type UserUpsertWithoutReceivedMessagesInputInputObject =
+  | Extract<keyof UserUpsertWithoutReceivedMessagesInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface MessageUpdateManyMutationInput {
+  body?: string | null
+}
+export type MessageUpdateManyMutationInputInputObject =
+  | Extract<keyof MessageUpdateManyMutationInput, string>
+  | { name: 'body', alias?: string  } 
+  
 export interface UserCreateInput {
   id?: string | null
   email?: string
   password?: string
   name?: string
+  sentMessages?: MessageCreateManyWithoutSenderInput | null
+  receivedMessages?: MessageCreateManyWithoutReceiverInput | null
   spotifyToken?: string | null
 }
 export type UserCreateInputInputObject =
@@ -865,12 +1911,16 @@ export type UserCreateInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'name', alias?: string  } 
+  | { name: 'sentMessages', alias?: string  } 
+  | { name: 'receivedMessages', alias?: string  } 
   | { name: 'spotifyToken', alias?: string  } 
   
 export interface UserUpdateInput {
   email?: string | null
   password?: string | null
   name?: string | null
+  sentMessages?: MessageUpdateManyWithoutSenderInput | null
+  receivedMessages?: MessageUpdateManyWithoutReceiverInput | null
   spotifyToken?: string | null
 }
 export type UserUpdateInputInputObject =
@@ -878,6 +1928,8 @@ export type UserUpdateInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'name', alias?: string  } 
+  | { name: 'sentMessages', alias?: string  } 
+  | { name: 'receivedMessages', alias?: string  } 
   | { name: 'spotifyToken', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
@@ -892,6 +1944,27 @@ export type UserUpdateManyMutationInputInputObject =
   | { name: 'password', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'spotifyToken', alias?: string  } 
+  
+export interface MessageSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: MessageWhereInput | null
+  AND?: MessageSubscriptionWhereInput[]
+  OR?: MessageSubscriptionWhereInput[]
+  NOT?: MessageSubscriptionWhereInput[]
+}
+export type MessageSubscriptionWhereInputInputObject =
+  | Extract<keyof MessageSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
   
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -915,6 +1988,16 @@ export type UserSubscriptionWhereInputInputObject =
   | { name: 'NOT', alias?: string  } 
   
 
+export type MessageOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'body_ASC'
+  | 'body_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
 export type UserOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
