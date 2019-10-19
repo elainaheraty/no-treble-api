@@ -6,8 +6,8 @@ import { getUser } from './util/auth';
 
 const server = new ApolloServer({
   schema,
-  context: ({ req }) => ({
-    user: getUser(req),
+  context: async ({ req }) => ({
+    user: await getUser(req),
     prisma
   })
 });
